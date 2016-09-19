@@ -4,7 +4,7 @@
 * date:2016年9月
 */
 // 绘制背景
-function drawBaseSky(){
+function drawBg(){
 
 	var cxt = document.getElementById('skyPic').getContext("2d");
 	var bgColor = '#1290f4';
@@ -118,15 +118,57 @@ function changeCir(start,end,number,time){
 	//数字的增加
 	var numberDom =  document.querySelector('.number');
 	var numberGap = number - 350;
+	var timer;
+
+	// //方法一.递归settimeout。受机器和浏览器影响比较大。可能会因为dom操作过慢，容易出现css3结束之后，数字还没变化 完的情况。
+	//导致在多个浏览器中数字增长太慢。 
+	// var callback = function(){
+	// 	numberDom.innerText = parseInt(numberDom.innerText)+1;
+	// 	if(numberDom.innerText<number){
+	// 		setTimeout(callback, time/numberGap);
+	// 	}
+	// }
+	// setTimeout(callback, time/numberGap);
+
+
+	//方法二使用Interval的方式-begin。效果稍好。
+	// var callback = function(){
+	// 	var num = numberDom.innerText;
+	// 	if(num<number){
+	// 		numberDom.innerText = parseInt(numberDom.innerText)+1;			
+	// 	}else{
+	// 		clearInterval(timer);
+	// 	}			
+	// }
+
+	// timer = setInterval(callback, Math.floor(time/numberGap));
+	//使用Interval的方式-end
+
+
+	//方法三。效果最好。使用timeout队列的方式-begin
+	var timerArr = [];
 	var callback = function(){
-		numberDom.innerText = parseInt(numberDom.innerText)+1;
-		if(numberDom.innerText<number){
-			setTimeout(callback, time/numberGap);
+		var num = numberDom.innerText;
+		if(num<number){
+			numberDom.innerText = parseInt(numberDom.innerText)+1;
+			timerArr.pop();
+		}else{
+			for (var i = 0; i < timerArr.length; i++) {
+				clearInterval(timerArr[i]);
+			}
 		}
+
 	}
-	setTimeout(callback, time/numberGap);
+
+	for (var i = 0; i < numberGap; i++) {
+		(function(i){
+			timer = setTimeout(callback, i*time/numberGap);
+			timerArr.push(timer);
+		})(i);	
+	}
+	////使用timeout队列的方式-end
 }
 
 
-drawBaseSky();
+drawBg();
 changeCir(-22.5,157.5,700,1500);
