@@ -154,7 +154,7 @@ function changeCir(start,end,number,time){
 			timerArr.pop();
 		}else{
 			for (var i = 0; i < timerArr.length; i++) {
-				clearInterval(timerArr[i]);
+				clearTimeout(timerArr[i]);
 			}
 		}
 
