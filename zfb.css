@@ -1,0 +1,64 @@
+#skyPic{
+	width: 390px;
+	height: 390px;
+}
+
+.wrap{
+	position: relative;
+}
+
+.txt-wrap{
+	height: 0px;
+	width: 145px;
+	position: absolute;
+	top: 145px;
+	transform-origin: 100% 50%;
+}
+.txt{
+	transform: rotate(-90deg);
+	display: inline-block;
+	font-size: 12px;
+	color: #fff;
+	position: relative;
+	top: -12px;
+}
+.txt-cir{
+	height: 290px;
+	width: 290px;
+	position: absolute;
+	left: 50px;
+	top: 50px;
+	border-radius: 145px;
+}
+.move-cir{
+	position: absolute;
+	height: 365px;
+	width: 365px;
+	left: 13px;
+	top: 13px;
+}
+.cir-wrap{
+	position: absolute;
+	width: 182.5px;
+	height: 0;
+	transform-origin: 100% 50%;
+	top: 182.5px;
+	transform:rotate(-22.5deg)
+}
+.cir{
+	background: #fff;
+	height: 10px;
+	width: 10px;
+	border-radius: 5px;
+	position: relative;
+	top: -4px;
+}
+.number{
+	font-size: 72px;
+	position: absolute;
+	top: 140px;
+	left: 120px;
+	width: 154px;
+	text-align: center;
+	color: #fff;
+}
